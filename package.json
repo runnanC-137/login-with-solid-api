@@ -1,24 +1,21 @@
 {
-  "name": "Login-API",
+  "name": "users-crud_api",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/app.js",
+  "description": "uma API REST de login construida totalmente com javaScript",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node ./src/main.ts",
-    "start:dev": "set NODE_ENV='development' && tsnd --transpile-only --respawn --ignore-watch node_modules src/main.ts",
-    "test": "vitest",
-    "test:e2e": "vitest --config vite-e2e.config.ts"
+    "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RunnanC-137/Login-API.git"
+    "url": "git+https://github.com/RunnanC-137/users-crud_API.git"
   },
-  "author": "",
+  "author": "RunnaC-137",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RunnanC-137/Login-API/issues"
+    "url": "https://github.com/RunnanC-137/users-crud_API/issues"
   },
-  "homepage": "https://github.com/RunnanC-137/Login-API#readme",
+  "homepage": "https://github.com/RunnanC-137/users-crud_API#readme",
   "dependencies": {
     "@google-cloud/storage": "^6.9.4",
     "@hapi/joi": "^17.1.1",

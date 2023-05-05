@@ -4,22 +4,18 @@ import { createUserController } from '../controllers/create-user'
 import { updateUserController } from '../controllers/update-user'
 import { deleteUserController } from '../controllers/delete-user/'
 
-const userRouter = Router()
-const createUserRouter = Router()
+const router = Router()
 
-createUserRouter.post('/', (request: Request, response: Response) => {
+router.post('/', (request: Request, response: Response) => {
   void createUserController.handle(request, response)
 })
-
-export { createUserRouter }
-
-userRouter.get('/', (request: Request, response: Response) => {
+router.get('/', (request: Request, response: Response) => {
   void findUserController.handle(request, response)
 })
-userRouter.put('/', (request: Request, response: Response) => {
+router.put('/', (request: Request, response: Response) => {
   void updateUserController.handle(request, response)
 })
-userRouter.delete('/', (request: Request, response: Response) => {
+router.delete('/', (request: Request, response: Response) => {
   void deleteUserController.handle(request, response)
 })
-export default userRouter
+export { router as userRouter }
