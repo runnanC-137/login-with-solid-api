@@ -3,9 +3,10 @@ const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
 const process = require('process')
+const { config: allConging } = require('../../config/database.js')
+const env = process.env.NODE_ENV ?? 'development'
 const basename = path.basename(__filename)
-const env = process.env.NODE_ENV || 'development'
-const config = require('../../config/database.js')[env]
+const config = allConging[env]
 const db = {}
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config)
@@ -16,7 +17,7 @@ fs
       file.indexOf('.') !== 0 &&
       file !== basename &&
       file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
+      !file.includes('.test.js')
     )
   })
   .forEach(file => {

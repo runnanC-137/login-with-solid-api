@@ -1,8 +1,8 @@
 import { type Request, type Response } from 'express'
-import type UpdateUserUseCase from '../../../service/use-case/update-user/UpdateUserUseCase'
-import type IValidationProvider from '../../../service/providers/IValidationProvider'
+import type UpdateUserUseCase from '../../../../service/use-case/update-user/UpdateUserUseCase'
+import type IValidationProvider from '../../../../service/providers/IValidationProvider'
 
-export default class UpdateUserController {
+export class UpdateUserByIdController {
   constructor (
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly validationProvider: IValidationProvider

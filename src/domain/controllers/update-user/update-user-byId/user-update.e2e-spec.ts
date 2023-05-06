@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import request from 'supertest'
-import { hashProvider, tokenProvider } from '../../../service/providers/implementation'
-import { userRepository } from '../../../service/repositories/implementations'
-import { app } from '../../app'
-import User from '../../../service/entities/User'
+import { hashProvider } from '../../../../service/providers/implementation'
+import { userRepository } from '../../../../service/repositories/implementations'
+import { app } from '../../../app'
+import User from '../../../../service/entities/User'
 
 describe('Testando a rota de login', () => {
   it('Deve retornar um usuario com nome e email atualizados', async () => {
@@ -19,12 +19,10 @@ describe('Testando a rota de login', () => {
       email: 'matue@gmail.com'
     }
     await userRepository.create(user)
-    const token = tokenProvider.createToken({ id: user.id })
     expect(user.name).toBe(user.name)
     expect(user.email).toBe(user.email)
     const response = await request(app)
       .put('/user')
-      .set('Authorization', `Bearer ${token}`)
       .send(userUpdate)
     expect(response.status).toBe(200)
     expect(response.body.error).toBeFalsy()
@@ -44,10 +42,8 @@ describe('Testando a rota de login', () => {
       email: ''
     }
     await userRepository.create(user)
-    const token = tokenProvider.createToken({ id: user.id })
     const response = await request(app)
       .put('/user')
-      .set('Authorization', `Bearer ${token}`)
       .send(userUpdate)
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()
@@ -60,10 +56,8 @@ describe('Testando a rota de login', () => {
       name: 'matue',
       email: 'matue@gmail.com'
     }
-    const token = tokenProvider.createToken({ id: 'user.id' })
     const response = await request(app)
       .put('/user')
-      .set('Authorization', `Bearer ${token}`)
       .send(userUpdate)
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()

@@ -1,6 +1,6 @@
-import User from '../../entities/User'
-import type IUserRepository from '../../repositories/IUserRepository'
-import type IUpdateUserRequestDTO from './IUpdateUserDTO'
+import { User } from '../../entities/User'
+import { type IUserRepository } from '../../repositories/IUserRepository'
+import { type IUpdateUserRequestDTO } from './IUpdateUserDTO'
 
 export default class UpdateUserUseCase {
   constructor (

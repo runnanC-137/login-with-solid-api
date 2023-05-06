@@ -1,9 +1,15 @@
-import type User from '../entities/User'
+import { type User } from '../entities/User'
 
-export default interface IUserRepository {
+export interface IUserDataQueryProps {
+  name?: string
+}
+
+export interface IUserRepository {
   create: (user: User) => Promise<void>
   findById: (userId: string) => Promise<User | undefined>
   findByEmail: (email: string) => Promise<User | undefined>
+  findAll: () => Promise<User[]>
+  findMany: (query: IUserDataQueryProps) => Promise<User[]>
   update: (user: User) => Promise<User>
   delete: (userId: string) => Promise<void>
 

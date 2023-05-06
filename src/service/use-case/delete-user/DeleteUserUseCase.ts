@@ -1,4 +1,4 @@
-import type IUserRepository from '../../repositories/IUserRepository'
+import { type IUserRepository } from '../../repositories/IUserRepository'
 import type IDeleteUserRequestDTO from './DeleteUserDTO'
 
 export default class DeleteUserUseCase {

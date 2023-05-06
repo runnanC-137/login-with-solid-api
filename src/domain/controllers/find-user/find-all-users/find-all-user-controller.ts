@@ -1,16 +1,16 @@
-import type FindUserUseCase from '../../../service/use-case/find-user/FindUserUseCase'
 import { type Response, type Request } from 'express'
-export default class FindUserController {
+import type { FindAllUserUseCase } from '../../../../service/use-case/find-user/find-all-users/find-all-users-useCase'
+
+export class FindAllUserController {
   constructor (
-    private readonly findUserCase: FindUserUseCase
+    private readonly findAllUserUseCase: FindAllUserUseCase
   ) {
   }
 
   async handle (request: Request, response: Response): Promise<Response> {
-    const { id } = request.body
     try {
-      const user = await this.findUserCase.execute({ id })
-      return response.status(200).json(user)
+      const users = await this.findAllUserUseCase.execute()
+      return response.status(200).json(users)
     } catch (error: any) {
       return response.status(400).json({
         error: {

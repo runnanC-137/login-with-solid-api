@@ -1,7 +1,7 @@
 import { test, expect, describe } from 'vitest'
 import { updateUserUseCase } from './'
 import { userRepository } from '../../repositories/implementations'
-import User from '../../entities/User'
+import { User } from '../../entities/User'
 
 describe('testando a atualização de usuário', async () => {
   test('atualizando um usuário', async () => {

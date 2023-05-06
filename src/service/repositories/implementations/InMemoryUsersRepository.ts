@@ -1,23 +1,23 @@
-import type UserRepository from '../IUserRepository'
-import type User from '../../entities/User'
+import { type IUserRepository, type IUserDataQueryProps } from '../IUserRepository'
+import { type User } from '../../entities/User'
 
-interface IUserDataQueryProps {
-  email?: string
-  id?: string
-}
-
-class InMemoryUsersRepository implements UserRepository {
+class InMemoryUsersRepository implements IUserRepository {
   public users: User[] = [] /*  model.User */
   public async create (user: User): Promise<void> {
     this.users = [...this.users, user]
     // console.log(this.users)
   }
 
-  public findAll (): User[] {
+  public async findAll (): Promise<User[]> {
     return this.users
   }
 
-  public async findOne (dataQuery: IUserDataQueryProps): Promise<User | undefined> {
+  public async findMany ({ name }: IUserDataQueryProps): Promise<User[]> {
+    const ManyUsers = this.users.filter(user => user.name === name)
+    return ManyUsers
+  }
+
+  public async findOne (dataQuery: { email?: string, id?: string }): Promise<User | undefined> {
     const user = Object.entries(dataQuery).map(([key, value]) => {
       if (key === 'id') {
         return this.users.find(user => user.id === value)

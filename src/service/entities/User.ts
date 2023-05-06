@@ -5,7 +5,7 @@ interface IUserProps {
   email: string
   password?: string
 }
-export default class User {
+export class User {
   public readonly id: string
   public name!: string
   public email!: string
