@@ -1,16 +1,16 @@
 'use strict'
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 const Sequelize = require('sequelize')
 const process = require('process')
 const allConging = require('../../config/database.js')
 const env = process.env.NODE_ENV ?? 'development'
-const basename = path.basename(__filename)
+// const basename = path.basename(__filename)
 const config = allConging[env]
-const db = {}
+// const db = {}
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config)
-fs
+/* fs
   .readdirSync(__dirname)
   .filter(file => {
     return (
@@ -33,5 +33,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
-
-module.exports = db
+ */
+module.exports = sequelize
