@@ -4,6 +4,8 @@ interface IUserProps {
   name: string
   email: string
   password?: string
+  createAt?: string
+  updateAt?: string
 }
 export class User {
   public readonly id: string
@@ -20,23 +22,24 @@ export class User {
       this.id = id
     } else {
       this.id = uuidv4()
-      this.createAt = this.getData()
-      this.updateAt = this.getData()
+      /* this.createAt = this.getData()
+      this.updateAt = this.getData() */
     }
   }
 
-  private getData (): string {
+  /*   private getData (): string {
     const hoje = new Date()
-    /* const dia = hoje.getDate().toString().padStart(2, '0')
-    const mes = String(hoje.getMonth() + 1).padStart(2, '0')
-    const ano = hoje.getFullYear() */
+    // const dia = hoje.getDate().toString().padStart(2, '0')
+    // const mes = String(hoje.getMonth() + 1).padStart(2, '0')
+    // const ano = hoje.getFullYear()
     const hora = hoje.toLocaleString()
     // const dataAtual = `${dia}/${mes}/${ano} as ${hora}`
     return hora
-  }
+  } */
 
-  public updateDate (): void {
-    this.updateAt = this.getData()
+  public updateDate (newDate: string): void {
+    // this.updateAt = this.getData()
+    this.updateAt = newDate
   }
 
   public Setpassword (password: string): void {
