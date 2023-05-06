@@ -21,8 +21,6 @@ describe('Testando a rota de login', () => {
       .put(`/user/${user.id}`)
       .send(userUpdate)
 
-    console.log(response.body, await userRepository.findAll())
-
     expect(response.status).toBe(200)
     expect(response.body.error).toBeFalsy()
     expect(response.body.name).toBe(userUpdate.name)

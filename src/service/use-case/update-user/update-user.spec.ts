@@ -18,7 +18,6 @@ describe('testando a atualização de usuário', async () => {
       email: 'matue.do.raxa@gmail.com',
       id: user.id
     }
-    console.log(userRepository.findAll())
     const userUpdate = await updateUserUseCase.execute(
       userDataUpdate
     )
