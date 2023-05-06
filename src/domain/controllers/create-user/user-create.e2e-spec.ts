@@ -11,7 +11,7 @@ describe('[e2e] testando a criação de um usuário por meio da request', async 
       password: '818283732'
     }
     const response = await request(app)
-      .post('/user/new')
+      .post('/user')
       .send(userData)
 
     const userInDatabase = await userRepository.findByEmail(userData.email)
@@ -29,7 +29,7 @@ describe('testando a validação dos controllers', async () => {
       password: 'ruanruanruanruan'
     }
     const response = await request(app)
-      .post('/user/new')
+      .post('/user')
       .send(userData)
 
     const userInDatabase = await userRepository.findByEmail(userData.email)
