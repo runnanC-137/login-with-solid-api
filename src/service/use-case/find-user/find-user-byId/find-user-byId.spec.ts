@@ -1,6 +1,6 @@
 import { test, expect, describe } from 'vitest'
 import { createUserUseCase } from '../../create-user'
-import type ICreateUserRequestDTO from '../../create-user/ICreateUserDTO'
+import { type ICreateUserRequestDTO } from '../../create-user/icreate-user-DTO'
 import { findUserUseCase } from '.'
 import { User } from '../../../entities/User'
 

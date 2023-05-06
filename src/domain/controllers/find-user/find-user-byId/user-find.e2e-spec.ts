@@ -2,40 +2,29 @@ import { test, expect, describe } from 'vitest'
 import request from 'supertest'
 import { app } from '../../../app'
 import { userRepository } from '../../../../service/repositories/implementations'
-import { hashProvider } from '../../../../service/providers/implementation'
-import User from '../../../../service/entities/User'
+import { User } from '../../../../service/entities/User'
 
 describe('[e2e] testando a procura de um usuário por meio da request', async () => {
-  test('[e2e] procurando um usuário', async () => {
-    const userData = {
+  test('Procurando um usuário', async () => {
+    const user = new User({
       name: 'Runa',
       email: 'runnan@hotgas.com',
-      password: hashProvider.hashPassword('818283732')
-    }
-    const user = new User(userData)
+      password: '818283732'
+    })
     await userRepository.create(user)
     const response = await request(app)
-      .get('/user')
-      .send({ id: user.id })
-
-    const userInDatabase = await userRepository.findByEmail(user.email)
-    const responseUser = new User(response.body, response.body.id)
-
-    console.log(user, 'user')
-    console.log(responseUser, 'responseUser', response.body)
-    console.log(userInDatabase, 'userInDatabase')
+      .get(`/user/${user.id}`)
 
     expect(response.status).toBe(200)
     expect(response.body.error).toBeFalsy()
-    expect(userInDatabase).toBeTruthy()
-    expect(responseUser).toBeInstanceOf(User)
+    expect(await userRepository.findByEmail(user.email)).toBeInstanceOf(User)
+    expect(new User(response.body, response.body.id)).toBeInstanceOf(User)
   })
 })
 describe('testando a validação dos controllers', async () => {
   test('[e2e] tentado deletando um usuário inexistente', async () => {
     const response = await request(app)
-      .delete('/user')
-      .send({ id: 'user.id' })
+      .delete(`/user/${'user.id'}`)
 
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()
@@ -43,8 +32,7 @@ describe('testando a validação dos controllers', async () => {
   })
   test('[e2e] tentado deletando um usuário sem passar os dados necessários', async () => {
     const response = await request(app)
-      .delete('/user')
-      .send()
+      .delete(`/user/${'user.id'}`)
 
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()

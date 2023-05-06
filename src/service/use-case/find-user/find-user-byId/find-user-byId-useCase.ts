@@ -10,7 +10,6 @@ export class FindUserByIdUseCase {
 
   async execute ({ id }: IFindUserByIdRequestDTO): Promise<User> {
     const findUser = await this.userRepository.findById(id)
-    console.log(findUser, 'find')
     if (findUser === undefined) {
       throw new Error('user not exist')
     }

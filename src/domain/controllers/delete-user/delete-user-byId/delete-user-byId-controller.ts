@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import type DeleteUserUseCase from '../../../../service/use-case/delete-user/DeleteUserUseCase'
+import type DeleteUserUseCase from '../../../../service/use-case/delete-user/delete-user-useCase'
 
 export class DeleteUserByIdController {
   constructor (

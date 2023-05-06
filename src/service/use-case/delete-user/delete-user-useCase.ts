@@ -1,7 +1,7 @@
 import { type IUserRepository } from '../../repositories/IUserRepository'
-import type IDeleteUserRequestDTO from './DeleteUserDTO'
+import { type IDeleteUserRequestDTO } from './delete-user-DTO'
 
-export default class DeleteUserUseCase {
+export class DeleteUserUseCase {
   constructor (
     private readonly userRepository: IUserRepository
   ) {

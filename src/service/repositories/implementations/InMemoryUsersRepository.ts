@@ -56,4 +56,4 @@ class InMemoryUsersRepository implements IUserRepository {
   }
 }
 
-export default InMemoryUsersRepository
+export { InMemoryUsersRepository }

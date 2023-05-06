@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
-import { createUserUseCase } from './'
-import User from '../../entities/User'
+import { createUserUseCase } from '.'
+import { User } from '../../entities/User'
 
 test('criar um usuario', async () => {
   const name = 'matue'

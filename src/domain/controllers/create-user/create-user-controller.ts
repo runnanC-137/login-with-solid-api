@@ -1,5 +1,5 @@
 import type IValidationProvider from '../../../service/providers/IValidationProvider'
-import type CreateUserUseCase from '../../../service/use-case/create-user/CreateUserUseCase'
+import type CreateUserUseCase from '../../../service/use-case/create-user/create-user-useCase'
 import { type Response, type Request } from 'express'
 
 export default class CreateUserController {

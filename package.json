@@ -4,7 +4,10 @@
   "description": "uma API REST de login construida totalmente com javaScript",
   "main": "src/main.js",
   "scripts": {
-    "test": "test"
+    "start": "node ./src/main.ts",
+    "start:dev": "set NODE_ENV='development' && tsnd --transpile-only --respawn --ignore-watch node_modules src/main.ts",
+    "test": "vitest",
+    "test:e2e": "vitest --config vite-e2e.config.ts"
   },
   "repository": {
     "type": "git",

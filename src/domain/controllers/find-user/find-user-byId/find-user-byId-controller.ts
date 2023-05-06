@@ -8,7 +8,7 @@ export class FindUserByIdController {
   }
 
   async handle (request: Request, response: Response): Promise<Response> {
-    const { id } = request.body
+    const { id } = request.params
     try {
       const user = await this.findUserCase.execute({ id })
       return response.status(200).json(user)

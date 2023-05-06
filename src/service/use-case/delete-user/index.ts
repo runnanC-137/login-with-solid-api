@@ -1,5 +1,5 @@
 import { userRepository } from '../../repositories/implementations'
-import DeleteUserUseCase from './DeleteUserUseCase'
+import { DeleteUserUseCase } from './delete-user-useCase'
 
 const deleteUserUseCase = new DeleteUserUseCase(
   userRepository

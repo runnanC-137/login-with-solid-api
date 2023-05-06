@@ -1,5 +1,5 @@
-import ArrayUsersRepository from './InMemoryUsersRepository'
+import { InMemoryUsersRepository } from './InMemoryUsersRepository'
 
-const userRepository = new ArrayUsersRepository()
+const inMemoryUsersRepository = new InMemoryUsersRepository()
 
-export { userRepository }
+export { inMemoryUsersRepository as userRepository }

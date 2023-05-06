@@ -3,27 +3,26 @@ import request from 'supertest'
 import { hashProvider } from '../../../../service/providers/implementation'
 import { userRepository } from '../../../../service/repositories/implementations'
 import { app } from '../../../app'
-import User from '../../../../service/entities/User'
+import { User } from '../../../../service/entities/User'
 
 describe('Testando a rota de login', () => {
   it('Deve retornar um usuario com nome e email atualizados', async () => {
-    const password = '123456'
     const user = new User({
       name: 'ruan',
-      email: 'matue@g',
-      password: hashProvider.hashPassword(password)
+      email: 'matue@gmail.com'
     })
     const userUpdate = {
-      id: user.id,
       name: 'matue',
-      email: 'matue@gmail.com'
+      email: 'teto@gmail.com'
     }
     await userRepository.create(user)
-    expect(user.name).toBe(user.name)
-    expect(user.email).toBe(user.email)
+
     const response = await request(app)
-      .put('/user')
+      .put(`/user/${user.id}`)
       .send(userUpdate)
+
+    console.log(response.body, await userRepository.findAll())
+
     expect(response.status).toBe(200)
     expect(response.body.error).toBeFalsy()
     expect(response.body.name).toBe(userUpdate.name)
@@ -37,13 +36,12 @@ describe('Testando a rota de login', () => {
       password: hashProvider.hashPassword(password)
     })
     const userUpdate = {
-      id: user.id,
       name: '',
       email: ''
     }
     await userRepository.create(user)
     const response = await request(app)
-      .put('/user')
+      .put(`/user/${user.id}`)
       .send(userUpdate)
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()
@@ -52,12 +50,11 @@ describe('Testando a rota de login', () => {
   })
   it('Deve retornar um error de usuário inexistente', async () => {
     const userUpdate = {
-      id: 'user.id',
       name: 'matue',
       email: 'matue@gmail.com'
     }
     const response = await request(app)
-      .put('/user')
+      .put(`/user/${'user.id'}`)
       .send(userUpdate)
     expect(response.status).toBe(400)
     expect(response.body.error).toBeTruthy()

@@ -1,5 +1,5 @@
-import type ICreateUserRequestDTO from '../use-case/create-user/ICreateUserDTO'
-import type IUpdateUserRequestDTO from '../use-case/update-user/IUpdateUserDTO'
+import type ICreateUserRequestDTO from '../use-case/create-user/icreate-user-DTO'
+import type IUpdateUserRequestDTO from '../use-case/update-user/iupdate-user-DTO'
 
 interface IValidationProvider {
   validDataForCreateUser: (data: ICreateUserRequestDTO) => void

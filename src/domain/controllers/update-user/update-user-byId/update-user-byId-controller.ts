@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import type UpdateUserUseCase from '../../../../service/use-case/update-user/UpdateUserUseCase'
+import { type UpdateUserUseCase } from '../../../../service/use-case/update-user/update-user-useCase'
 import type IValidationProvider from '../../../../service/providers/IValidationProvider'
 
 export class UpdateUserByIdController {
@@ -10,7 +10,8 @@ export class UpdateUserByIdController {
   }
 
   async handle (request: Request, response: Response): Promise<Response> {
-    const { email, name, id } = request.body
+    const { id } = request.params
+    const { email, name } = request.body
     try {
       this.validationProvider.validDataForUpdateUser({
         email,

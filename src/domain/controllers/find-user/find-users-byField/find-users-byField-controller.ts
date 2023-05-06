@@ -8,9 +8,9 @@ export class FindUsersByFieldController {
   }
 
   async handle (request: Request, response: Response): Promise<Response> {
-    const { name } = request.body
+    const { query } = request.body
     try {
-      const user = await this.findUsersByFieldUseCase.execute({ name })
+      const user = await this.findUsersByFieldUseCase.execute(query)
       return response.status(200).json(user)
     } catch (error: any) {
       return response.status(400).json({

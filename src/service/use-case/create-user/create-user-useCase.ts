@@ -1,9 +1,9 @@
-import User from '../../entities/User'
+import { User } from '../../entities/User'
 import type IHashProvider from '../../providers/IHashProvider'
-import type IUserRepository from '../../repositories/IUserRepository'
-import type ICreateUserRequestDTO from './ICreateUserDTO'
+import { type IUserRepository } from '../../repositories/IUserRepository'
+import { type ICreateUserRequestDTO } from './icreate-user-DTO'
 
-export default class CreateUserUseCase {
+export class CreateUserUseCase {
   constructor (
     private readonly userRepository: IUserRepository,
     private readonly hashProvider: IHashProvider
