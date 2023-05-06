@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import type DeleteUserUseCase from '../../../../service/use-case/delete-user/delete-user-useCase'
+import { type DeleteUserUseCase } from '../../../../service/use-case/delete-user/delete-user-useCase'
 
 export class DeleteUserByIdController {
   constructor (
@@ -8,10 +8,10 @@ export class DeleteUserByIdController {
   }
 
   async handle (request: Request, response: Response): Promise<Response> {
-    const { id } = request.body
+    const { id } = request.params
     try {
       await this.deleteUserCase.execute({ id })
-      return response.status(204).json()
+      return response.json({ message: 'user deleted' })
     } catch (error: any) {
       return response.status(400).json({
         error: {
