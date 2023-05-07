@@ -1,0 +1,9 @@
+PORT = 3333
+TOKEN_SECRET = "knasjcoDIAOJvASAa0DADasVSoVDDWvjoava9eaefsceef"
+TOKEN_EXPIREIN = 2520000
+DB_URL = postgres://luqmtwjj:FHjYoA60hxpI1G1VLiurcbOdTcNF_sY-@babar.db.elephantsql.com/luqmtwjj
+DB_HOST=babar.db.elephantsql.com
+DB_PASSWORD=FHjYoA60hxpI1G1VLiurcbOdTcNF_sY-
+DB_USERNAME=luqmtwjj
+DB_DATABASE=luqmtwjj
+DB_DIALECT=postgres

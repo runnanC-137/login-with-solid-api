@@ -1,13 +1,19 @@
-import { test, expect, describe } from 'vitest'
+import { test, expect, describe, beforeEach, afterEach } from 'vitest'
 import request from 'supertest'
 import { app } from '../../app'
 import { userRepository } from '../../../service/repositories/implementations'
 
 describe('[e2e] testando a criação de um usuário por meio da request', async () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('[e2e] criando um usuário', async () => {
     const userData = {
       name: 'Runa',
-      email: 'runnan@hotgas.com',
+      email: 'runnrran@hotgas.com',
       password: '818283732'
     }
     const response = await request(app)
@@ -23,6 +29,12 @@ describe('[e2e] testando a criação de um usuário por meio da request', async 
   })
 })
 describe('testando a validação dos controllers', async () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('[e2e] tentando criar o usuário sem um nome', async () => {
     const userData = {
       email: 'ruanlons@gmail.com',

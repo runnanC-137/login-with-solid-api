@@ -1,10 +1,16 @@
-import { test, expect, describe } from 'vitest'
+import { test, expect, describe, beforeEach, afterEach } from 'vitest'
 import request from 'supertest'
 import { app } from '../../../app'
 import { userRepository } from '../../../../service/repositories/implementations'
 import { User } from '../../../../service/entities/User'
 
 describe('[e2e] testando a procura de um usuário por meio da request', async () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('Procurando um usuário', async () => {
     const user = new User({
       name: 'Runa',

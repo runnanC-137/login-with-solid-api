@@ -1,24 +1,41 @@
-import { test, expect, describe } from 'vitest'
+import { test, expect, describe, beforeEach, afterEach } from 'vitest'
 import request from 'supertest'
 import { app } from '../../../app'
 import { userRepository } from '../../../../service/repositories/implementations'
 import { User } from '../../../../service/entities/User'
 
-describe('[e2e] testando a procura de todos os usuário por meio da request', async () => {
+describe('[e2e] testando a procura de todos os usuário por meio da request', async (done) => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('Procurando os usuários', async () => {
-    const user = new User({
+    await userRepository.create(new User({
+      name: 'Runa',
+      email: 'rn@hotgas.com',
+      password: '8182732'
+    }))
+    await userRepository.create(new User({
+      name: 'Runa',
+      email: 'run@hotgas.com',
+      password: '83732'
+    }))
+    await userRepository.create(new User({
+      name: 'Runa',
+      email: 'runnan@hgas.com',
+      password: '8182837'
+    }))
+    await userRepository.create(new User({
       name: 'Runa',
       email: 'runnan@hotgas.com',
-      password: '818283732'
-    })
-    await userRepository.create(user)
-    await userRepository.create(user)
-    await userRepository.create(user)
-    await userRepository.create(user)
-
+      password: '8183732'
+    }))
     const response = await request(app)
       .get('/user')
 
+    console.log(response.body, '000000000')
     expect(response.status).toBe(200)
     expect(response.body.error).toBeFalsy()
     expect(response.body).toBeInstanceOf(Array<User>)

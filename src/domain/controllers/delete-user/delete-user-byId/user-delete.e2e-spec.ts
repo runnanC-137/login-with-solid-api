@@ -1,4 +1,4 @@
-import { test, expect, describe } from 'vitest'
+import { test, expect, describe, beforeEach, afterEach } from 'vitest'
 import request from 'supertest'
 import { app } from '../../../app'
 import { userRepository } from '../../../../service/repositories/implementations'
@@ -6,6 +6,12 @@ import { hashProvider } from '../../../../service/providers/implementation'
 import { User } from '../../../../service/entities/User'
 
 describe('[e2e] testando a destruição de um usuário por meio da request', async () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('[e2e] deletando um usuário', async () => {
     const userData = {
       name: 'Runa',
@@ -23,6 +29,12 @@ describe('[e2e] testando a destruição de um usuário por meio da request', asy
   })
 })
 describe('testando a validação dos controllers', async () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   test('[e2e] tentado deletando um usuário inexistente', async () => {
     const response = await request(app)
       .delete(`/user/${'user.id'}`)

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import request from 'supertest'
 import { hashProvider } from '../../../../service/providers/implementation'
 import { userRepository } from '../../../../service/repositories/implementations'
@@ -6,14 +6,22 @@ import { app } from '../../../app'
 import { User } from '../../../../service/entities/User'
 
 describe('Testando a rota de login', () => {
+  beforeEach(async () => {
+    await userRepository.destroyAll()
+  })
+  afterEach(async () => {
+    await userRepository.destroyAll()
+  })
   it('Deve retornar um usuario com nome e email atualizados', async () => {
     const user = new User({
       name: 'ruan',
-      email: 'matue@gmail.com'
+      email: 'matue@gmail.com',
+      password: '1121fr34'
     })
     const userUpdate = {
       name: 'matue',
-      email: 'teto@gmail.com'
+      email: 'teto@gmail.com',
+      password: '1121fr34'
     }
     await userRepository.create(user)
 

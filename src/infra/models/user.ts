@@ -11,8 +11,7 @@ class User extends Model {
     this.init(
       {
         id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
+          type: DataTypes.STRING(250),
           primaryKey: true
         },
         name: {
@@ -23,11 +22,15 @@ class User extends Model {
           type: DataTypes.STRING(255),
           allowNull: false,
           unique: true
+        },
+        password: {
+          type: DataTypes.STRING(255),
+          allowNull: false
         }
       },
       {
         sequelize,
-        tableName: 'users',
+        tableName: 'Users',
         modelName: 'User'
       }
     )

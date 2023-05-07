@@ -1,5 +1,5 @@
 import { InMemoryUsersRepository } from './InMemoryUsersRepository'
-
-const inMemoryUsersRepository = new InMemoryUsersRepository()
-
-export { inMemoryUsersRepository as userRepository }
+import { PostgresUsersRepository } from './PostgresUsersRepository'
+export const inMemoryUsersRepository = new InMemoryUsersRepository()
+const postgresUsersRepository = new PostgresUsersRepository()
+export { postgresUsersRepository as userRepository }

@@ -1,14 +1,9 @@
 'use strict'
-// const fs = require('fs')
-// const path = require('path')
+require('dotenv').config()
 const Sequelize = require('sequelize')
 const process = require('process')
-const allConging = require('../../config/database.js')
-const env = process.env.NODE_ENV ?? 'development'
-// const basename = path.basename(__filename)
-const config = allConging[env]
-// const db = {}
-
+const env = process.env.NODE_ENV || 'development'
+const config = require('../../config/database.js')[env]
 const sequelize = new Sequelize(config.database, config.username, config.password, config)
 /* fs
   .readdirSync(__dirname)

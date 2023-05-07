@@ -20,7 +20,6 @@ class PostgresUsersRepository implements IUserRepository {
       }, String(user.id))
       users.push(oneUser)
     })
-    console.log(sequelizeUsers)
     return users
   }
 
@@ -76,6 +75,10 @@ class PostgresUsersRepository implements IUserRepository {
   public async delete (userId: string): Promise<void> {
     const user = await this.users.findByPk(userId)
     await user?.destroy()
+  }
+
+  public async destroyAll (): Promise<void> {
+    await this.users.destroy({ where: {} })
   }
 }
 export { PostgresUsersRepository }
