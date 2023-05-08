@@ -17,27 +17,28 @@ class InMemoryUsersRepository implements IUserRepository {
     return ManyUsers
   }
 
-  public async findOne (dataQuery: { email?: string, id?: string }): Promise<User | undefined> {
+  public async findOne (dataQuery: { email?: string, id?: string }): Promise<User | null> {
     const user = Object.entries(dataQuery).map(([key, value]) => {
       if (key === 'id') {
         return this.users.find(user => user.id === value)
       } else if (key === 'email') {
         return this.users.find(user => user.email === value)
       } else {
-        return undefined
+        return null
       }
     })[0]
-
-    // console.log(this.users, 'repos', key, value)
+    if (user === undefined) {
+      return null
+    }
     return user
   }
 
-  public async findById (id: string): Promise<User | undefined> {
+  public async findById (id: string): Promise<User | null> {
     const user = this.findOne({ id })
     return await user
   }
 
-  public async findByEmail (email: string): Promise<User | undefined> {
+  public async findByEmail (email: string): Promise<User | null> {
     const user = await this.findOne({ email })
     return user
   }

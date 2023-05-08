@@ -6,8 +6,8 @@ export interface IUserDataQueryProps {
 
 export interface IUserRepository {
   create: (user: User) => Promise<void>
-  findById: (userId: string) => Promise<User | undefined>
-  findByEmail: (email: string) => Promise<User | undefined>
+  findById: (userId: string) => Promise<User | null>
+  findByEmail: (email: string) => Promise<User | null>
   findAll: () => Promise<User[]>
   findMany: (query: IUserDataQueryProps) => Promise<User[]>
   update: (user: User) => Promise<User>

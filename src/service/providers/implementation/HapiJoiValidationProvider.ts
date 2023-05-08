@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
-import type ICreateUserRequestDTO from '../../use-case/create-user/icreate-user-DTO'
-import type IUpdateUserRequestDTO from '../../use-case/update-user/iupdate-user-DTO'
+import { type ICreateUserRequestDTO } from '../../use-case/create-user/icreate-user-DTO'
+import { type IUpdateUserRequestDTO } from '../../use-case/update-user/iupdate-user-DTO'
 import type IValidationProvider from '../IValidationProvider'
 
 class HapiJoiValidationProvider implements IValidationProvider {
@@ -21,8 +21,8 @@ class HapiJoiValidationProvider implements IValidationProvider {
     const {
       error
     } = Joi.object({
-      email: Joi.string().required().min(3).max(50),
-      name: Joi.string().required().min(3).max(100)
+      email: Joi.string().min(3).max(50),
+      name: Joi.string().min(3).max(100)
     }).validate(data)
     if (error !== undefined) {
       throw new Error(error.message)

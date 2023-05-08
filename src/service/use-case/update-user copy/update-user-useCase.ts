@@ -1,5 +1,5 @@
-import { User } from '../../entities/User'
-import { type IUserRepository } from '../../repositories/IUserRepository'
+import { User } from '../../../entities/User'
+import { type IUserRepository } from '../../../repositories/IUserRepository'
 import { type IUpdateUserRequestDTO } from './iupdate-user-DTO'
 
 export class UpdateUserUseCase {
