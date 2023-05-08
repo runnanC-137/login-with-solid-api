@@ -30,7 +30,7 @@ export class PrismaUsersRepository implements IUserRepository {
   }
 
   public async findById (id: string): Promise<User | null> {
-    const prismaUser = await prisma.user.findUnique({
+    const prismaUser = await this.users.findUnique({
       where: { id }
     })
     // console.log(prismaUser)
@@ -38,7 +38,7 @@ export class PrismaUsersRepository implements IUserRepository {
   }
 
   public async findByEmail (email: string): Promise<User | null> {
-    const prismaUser = await prisma.user.findUnique({
+    const prismaUser = await this.users.findUnique({
       where: { email }
     })
     // console.log(this.users, 'repos', key, value)
@@ -46,10 +46,11 @@ export class PrismaUsersRepository implements IUserRepository {
   }
 
   public async update (user: User): Promise<User> {
-    const { id, createdAt, password, email, ...rest } = user
-    await prisma.user.update({
+    const { id, email, ...rest } = user
+    const prismaUser = await this.users.findUnique({ where: { id } })
+    await this.users.update({
       where: { id },
-      data: { email: email === '' ? undefined : email, ...rest }
+      data: { email: email === prismaUser?.email ? undefined : email, ...rest }
     })
     return user
   }

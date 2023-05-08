@@ -13,18 +13,16 @@ export class UpdateUserUseCase {
     if (userExit == null) {
       throw new Error('user not exit')
     }
-    const { password, ...userData } = userExit
     const emailAlreadyExit = await this.userRepository.findByEmail(data.email ?? '')
     if (emailAlreadyExit != null) {
       throw new Error('user email is already in use')
     }
-    const { email } = userData
-    userData.email = data.email === undefined ? '' : data.email
-    userData.name = data.name === undefined ? userData.name : data.name
-    const user = new User(userData)
+    const { password, email, name, ...userData } = userExit
+    const exitEmail = data.email === undefined ? userExit.email : data.email
+    const exitName = data.name === undefined ? userExit.name : data.name
+    const user = new User({ email: exitEmail, name: exitName, ...userData })
     user.updatedAt = new Date()
     const updateUser = await this.userRepository.update(user)
-    updateUser.email = data.email === undefined ? email : data.email
     return updateUser
   }
 }
