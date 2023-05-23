@@ -1,8 +1,8 @@
-import { test, expect, describe } from 'vitest'
-import { createUserUseCase } from '../../create-user'
-import { type ICreateUserRequestDTO } from '../../create-user/icreate-user-DTO'
-import { findUserUseCase } from '.'
-import { User } from '../../../entities/User'
+
+import { createUserUseCase } from '../create-user'
+import { type ICreateUserRequestDTO } from '../create-user/icreate-user-DTO'
+import { findUserUseCase } from '../find-user/find-user-byId'
+import { User } from '../../entities/User'
 
 const matueData: ICreateUserRequestDTO = {
   name: 'matue',

@@ -1,5 +1,5 @@
 import { type Response, type Request } from 'express'
-import { type FindUsersByFieldUseCase } from '../../../../service/use-case/find-user/find-users-byField/find-users-byField-useCase'
+import { type FindUsersByFieldUseCase } from '../../../../service/use-case/utils/find-users-byField/find-users-byField-useCase'
 
 export class FindUsersByFieldController {
   constructor (

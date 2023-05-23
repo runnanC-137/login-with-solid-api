@@ -1,5 +1,5 @@
-import { test, expect, describe } from 'vitest'
-import { updateUserUseCase } from '.'
+
+import { updateUserUseCase } from '../update-user'
 import { userRepository } from '../../repositories/implementations'
 import { User } from '../../entities/User'
 

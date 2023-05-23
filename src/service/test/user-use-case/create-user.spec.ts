@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { createUserUseCase } from '.'
+import { createUserUseCase } from '../create-user'
 import { User } from '../../entities/User'
 
 test('criar um usuario', async () => {

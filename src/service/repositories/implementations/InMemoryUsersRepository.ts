@@ -3,9 +3,10 @@ import { type User } from '../../entities/User'
 
 class InMemoryUsersRepository implements IUserRepository {
   public users: User[] = [] /*  model.User */
-  public async create (user: User): Promise<void> {
+  public async create (user: User): Promise<User> {
     this.users = [...this.users, user]
-    // console.log(this.users)
+
+    return user
   }
 
   public async findAll (): Promise<User[]> {

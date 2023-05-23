@@ -1,6 +1,6 @@
-import { test, expect, describe } from 'vitest'
+
 import { createUserUseCase } from '../create-user'
-import { deleteUserUseCase } from '.'
+import { deleteUserUseCase } from '../delete-user'
 import { findUserUseCase } from '../find-user/find-user-byId'
 import { type ICreateUserRequestDTO } from '../create-user/icreate-user-DTO'
 import { User } from '../../entities/User'

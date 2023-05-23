@@ -1,5 +1,5 @@
 import { type Response, type Request } from 'express'
-import type { FindAllUserUseCase } from '../../../../service/use-case/find-user/find-all-users/find-all-users-useCase'
+import type { FindAllUserUseCase } from '../../../../service/use-case/utils/find-all-users/find-all-users-useCase'
 
 export class FindAllUserController {
   constructor (

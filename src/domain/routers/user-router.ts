@@ -12,15 +12,15 @@ router.post('/', (request: Request, response: Response) => {
   void createUserController.handle(request, response)
 })
 
-router.get('/query', (request: Request, response: Response) => {
+/* router.post('/query', (request: Request, response: Response) => {
   void findUsersByFieldController.handle(request, response)
-})
+}) */
 router.get('/:id', (request: Request, response: Response) => {
   void findUserByIdController.handle(request, response)
 })
-router.get('/', (request: Request, response: Response) => {
+/* router.get('/', (request: Request, response: Response) => {
   void findAllUserController.handle(request, response)
-})
+}) */
 
 router.put('/:id', (request: Request, response: Response) => {
   void updateUserByIdController.handle(request, response)
@@ -29,4 +29,5 @@ router.put('/:id', (request: Request, response: Response) => {
 router.delete('/:id', (request: Request, response: Response) => {
   void deleteUserByIdController.handle(request, response)
 })
-export { router as userRouter }
+
+export { router }

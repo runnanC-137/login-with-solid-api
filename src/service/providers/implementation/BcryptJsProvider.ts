@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import type IHashProvider from '../IHashProvider'
 
 class BcryptJsProvider implements IHashProvider {
