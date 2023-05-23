@@ -1,85 +1,99 @@
-import { UserRepository } from '../user-repository'
-import { User } from 'src/entities/user-entities' 
-import { PrismaService } from 'src/database/prisma.service'
-import { Injectable } from '@nestjs/common'
+import { User } from '../../entities/User'
+import type IHashProvider from '../../providers/IHashProvider'
+import { type IUserRepository } from '../../repositories/IUserRepository'
+import { type CreateUserRequestDTO } from '../../dtos/create-user-dto'
+import { UpdateUserRequestDTO } from '../../dtos/update-user-dto'
+import { FindUserByIdRequestDTO } from '../../dtos/read-user-byId-dto'
+import { UpdateUserPasswordRequestDTO } from '../../dtos/update-user-password-dto'
 
-const prisma = new PrismaService()
+export class UserUseCase {
+  constructor(
+    private userRepository: IUserRepository,
+    private hashProvider: IHashProvider,
+  ) {}
 
-@Injectable()
-export class PrismaUserRepository implements UserRepository {
-  public user = prisma.user
-  
-  public async create(user: User): Promise<User> {
-    const prismaUser = await this.user.create({
-      data: {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      },
-    })
-    const savedUser = new User(prismaUser)
-    return savedUser
-  }
-
-  public async readAll(): Promise<User[]> {
-    return (await this.user.findMany()).map((user) => {
-      return new User(user)
-    })
-  }
-
-  public async read(id: string): Promise<User | null> {
-    const prismaUser = await this.user.findUnique({
-      where: { id },
-    })
-    if (!prismaUser) {
-      return null
+  async create(data: CreateUserRequestDTO): Promise<User> {
+    const userAlreadyExit = await this.userRepository.findByEmail(data.email)
+    if (userAlreadyExit != null) {
+      throw new Error('user already exit')
     }
-    const user = new User(prismaUser)
+    const userData = new User(data)
+    const hashPassword = this.hashProvider.hashPassword(data.password)
+    userData.password = hashPassword
+    const user = await this.userRepository.create(userData)
     return user
   }
 
-  public async readByEmail(email: string): Promise<User | null> {
-    const prismaUser = await this.user.findUnique({
-      where: { email },
-    })
-    if (!prismaUser) {
-      return null
+  async read({ id }: FindUserByIdRequestDTO): Promise<User> {
+    const findUser = await this.userRepository.findById(id)
+    if (!findUser) {
+      throw new Error('user not exist')
     }
-    const user = new User(prismaUser)
-    return user
+    return findUser
   }
 
-  public async update(user: User): Promise<User> {
-    const prismaUser = await this.user.findFirstOrThrow({
-      where: { id: user.id },
-    })
-    const email = prismaUser.email === user.email ? undefined : user.email
-    const updatedUserPrisma = await this.user.update({
-      where: { id: user.id },
-      data: {
-        name: user.name,
-        email,
-      },
-    })
-    const updatedUser = new User(updatedUserPrisma)
-    return updatedUser
+  async readAll(): Promise<User[]> {
+    return await this.userRepository.findAll()
   }
 
-  /*  public async updateEmail (user: User): Promise<User> {
+  // readAll
+  // readMany
+  async update(data: UpdateUserRequestDTO): Promise<User> {
+    const userExit = await this.userRepository.findById(data.id)
+    if (!userExit) {
+      throw new Error('user not exit')
+    }
 
-  } */
-  public async updatePassword(user: User): Promise<void> {
-    await this.user.update({
-      where: { id: user.id },
-      data: {
-        password: user.password,
-      },
+    if (data.email) {
+      const emailAlreadyExit = await this.userRepository.findByEmail(data.email)
+      if (emailAlreadyExit) {
+        throw new Error('user email is already in use')
+      }
+    }
+
+    const updateUserData = new User({
+      id: userExit.id,
+      name: data.name ?? userExit.name,
+      email: data.email ?? userExit.email,
+      updatedAt: new Date(),
     })
+    const updateUser = await this.userRepository.update(updateUserData)
+    return updateUser
   }
 
-  public async delete(id: string): Promise<void> {
-    await this.user.delete({
-      where: { id },
+  async updatePassword(data: UpdateUserPasswordRequestDTO): Promise<void> {
+    const userExit = await this.userRepository.findById(data.id)
+
+    if (!userExit) {
+      throw new Error('user not exit')
+    }
+
+    const isPasswordTruth = this.hashProvider.verifyPassword(
+      data.password,
+      userExit.password,
+    )
+
+    if (!isPasswordTruth) {
+      throw new Error('password incorrectly')
+    }
+
+    const hashPassword = this.hashProvider.hashPassword(data.newPassword)
+
+    const updateUserData = new User({
+      id: userExit.id,
+      name: userExit.name,
+      email: userExit.email,
+      password: hashPassword,
     })
+
+    await this.userRepository.updatePassword(updateUserData)
+  }
+
+  async delete({ id }: FindUserByIdRequestDTO): Promise<void> {
+    const userAlreadyExit = await this.userRepository.findById(id)
+    if (userAlreadyExit === undefined) {
+      throw new Error('user not exist')
+    }
+    await this.userRepository.delete(id)
   }
 }
