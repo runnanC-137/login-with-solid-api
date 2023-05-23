@@ -1,15 +1,15 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import type IHashProvider from '../IHashProvider'
 
 class BcryptJsProvider implements IHashProvider {
-  hashPassword (password: string): string {
+  hashPassword(password: string): string {
     const saltRounds = 10
     const salt = bcrypt.genSaltSync(saltRounds)
     const hash = bcrypt.hashSync(password, salt)
     return hash
-  };
+  }
 
-  verifyPassword (password: string, hashPassword: string): boolean {
+  verifyPassword(password: string, hashPassword: string): boolean {
     const isCorrectly = bcrypt.compareSync(password, hashPassword)
     return isCorrectly
   }

@@ -5,14 +5,15 @@ export interface IUserDataQueryProps {
 }
 
 export interface IUserRepository {
-  create: (user: User) => Promise<void>
-  findById: (userId: string) => Promise<User | undefined>
-  findByEmail: (email: string) => Promise<User | undefined>
+  user: any
+  create: (user: User) => Promise<User>
+  findById: (userId: string) => Promise<User | null>
+  findByEmail: (email: string) => Promise<User | null>
   findAll: () => Promise<User[]>
-  findMany: (query: IUserDataQueryProps) => Promise<User[]>
+  /* findMany: (query: IUserDataQueryProps) => Promise<User[]> */
   update: (user: User) => Promise<User>
+  updatePassword: (user: User) => Promise<void>
   delete: (userId: string) => Promise<void>
-
 }
 
 /* class UserRepository {

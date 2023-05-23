@@ -1,5 +1,5 @@
 import { InMemoryUsersRepository } from './InMemoryUsersRepository'
+import { PrismaUserRepository } from './PrismaUserRepository'
 
-const inMemoryUsersRepository = new InMemoryUsersRepository()
-
-export { inMemoryUsersRepository as userRepository }
+export const inMemoryUsersRepository = new InMemoryUsersRepository()
+export const prismaUserRepository = new PrismaUserRepository()

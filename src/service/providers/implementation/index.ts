@@ -1,10 +1,7 @@
 import BcryptJsProvider from './BcryptJsProvider'
-import HapiJoiValidationProvider from './HapiJoiValidationProvider'
+import { HapiJoiValidationProvider } from './HapiJoiValidationProvider'
 // import CloudUploadProvider from './CloudUploadProvider'
 
-const hashProvider = new BcryptJsProvider()
-const validationProvider = new HapiJoiValidationProvider()
-export {
-  validationProvider,
-  hashProvider
-}
+const bcryptJsProvider = new BcryptJsProvider()
+const hapiJoiValidationProvider = new HapiJoiValidationProvider()
+export { hapiJoiValidationProvider, bcryptJsProvider }
