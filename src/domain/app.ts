@@ -11,6 +11,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
 app.use('/*', (req, res) => {
-  res.json({ message: 'this router not exits' })
+  res.status(400).json({ message: 'this router not exits' })
 })
 export { app }
