@@ -1,7 +1,7 @@
 # User management API
 uma API REST de gerenciamento de usuarios construida com JavaScript e TypeScript, seguindo os principios do solid.
 
-## Despendencias
+## Dependências
 
 1. Node.js 16.16
 
