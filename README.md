@@ -13,8 +13,8 @@ uma API REST de gerenciamento de usuarios construida com JavaScript e TypeScript
 ~~~ 
 2. criar o arquivo **.env** na raiz do Projeto e configurar as variáveis de ambiente
 ~~~ 
-    HOST=localhost
-    PORT=3000
+   DATABASE_URL="file:./dev.db"
+   DOMAIN_PORT=3333
 ~~~
 3. rodar o projeto
 ~~~
