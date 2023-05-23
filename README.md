@@ -1,10 +1,9 @@
-# Login API 
-uma API REST de login construida totalmente com javaScript
+# User management API
+uma API REST de gerenciamento de usuarios construida com JavaScript e TypeScript, seguindo os principios do solid.
 
 ## Despendencias
 
 1. Node.js 16.16
-2. Servidor MongoDB (local/remoto) 
 
 ## Passo a passo
 
@@ -14,12 +13,10 @@ uma API REST de login construida totalmente com javaScript
 ~~~ 
 2. criar o arquivo **.env** na raiz do Projeto e configurar as variáveis de ambiente
 ~~~ 
-    MONGO_CONNECTION_URL=
     HOST=localhost
     PORT=3000
 ~~~
-4. iniciar o banco de dados MongoDB
-5. rodar o projeto
+3. rodar o projeto
 ~~~
     npm start
 ~~~
