@@ -1,4 +1,3 @@
-
 interface IUserProps {
   id?: string
   name: string
@@ -9,17 +8,18 @@ interface IUserProps {
 }
 
 export class User {
-  constructor (private props: IUserProps) {
-    Object.assign(this, props)
+  constructor(private props: IUserProps) {
+    Object.assign(this.props, props)
   }
 
   get data() {
     return this.props
   }
-  
-  /* get id(): string {
-    return this.props.id
-  } */
+
+  get id() {
+    return this.props.id ?? this.id
+  }
+
   set id(id: string) {
     this.props.id = id
   }
@@ -27,6 +27,7 @@ export class User {
   get name() {
     return this.props.name
   }
+
   set name(name: string) {
     this.props.name = name
   }
@@ -34,6 +35,7 @@ export class User {
   get email() {
     return this.props.email
   }
+
   set email(email: string) {
     this.props.email = email
   }
@@ -41,17 +43,23 @@ export class User {
   get password() {
     return this.props.email
   }
+
   set password(password: string) {
     this.props.password = password
   }
 
   get createdAt() {
-    return this.props.createdAt
+    return this.props.createdAt ?? this.createdAt
   }
 
-  /* get updatedAt() {
-    return this.props.updatedAt
-  } */
+  set createdAt(createdAt: Date) {
+    this.props.createdAt = createdAt
+  }
+
+  get updatedAt() {
+    return this.props.createdAt ?? this.updatedAt
+  }
+
   set updatedAt(updatedAt: Date) {
     this.props.updatedAt = updatedAt
   }

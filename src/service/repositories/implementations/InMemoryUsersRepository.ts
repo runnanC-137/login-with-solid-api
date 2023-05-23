@@ -2,6 +2,7 @@ import { type IUserRepository, type IUserDataQueryProps } from '../IUserReposito
 import { type User } from '../../entities/User'
 
 class InMemoryUsersRepository implements IUserRepository {
+  user: any
   public users: User[] = [] /*  model.User */
   public async create (user: User): Promise<User> {
     this.users = [...this.users, user]

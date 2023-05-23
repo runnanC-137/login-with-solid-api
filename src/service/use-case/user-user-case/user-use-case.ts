@@ -6,12 +6,12 @@ import { UpdateUserRequestDTO } from '../../dtos/update-user-dto'
 import { FindUserByIdRequestDTO } from '../../dtos/read-user-byId-dto'
 
 export class UserUseCase {
-  constructor (
-    private readonly userRepository: IUserRepository,
-    private readonly hashProvider: IHashProvider
+  constructor(
+    private userRepository: IUserRepository,
+    private hashProvider: IHashProvider,
   ) {}
 
-  async create (data: CreateUserRequestDTO): Promise<User> {
+  async create(data: CreateUserRequestDTO): Promise<User> {
     const userAlreadyExit = await this.userRepository.findByEmail(data.email)
     if (userAlreadyExit != null) {
       throw new Error('user already exit')
@@ -23,39 +23,44 @@ export class UserUseCase {
     return user
   }
 
-  async read ({ id }: FindUserByIdRequestDTO): Promise<User> {
+  async read({ id }: FindUserByIdRequestDTO): Promise<User> {
     const findUser = await this.userRepository.findById(id)
-    if (findUser === undefined) {
+    if (!findUser) {
       throw new Error('user not exist')
     }
     return findUser
   }
-  //readAll
-  //readMany
-  async update (data: UpdateUserRequestDTO): Promise<User> {
+
+  async readAll(): Promise<User[]> {
+    return await this.userRepository.findAll()
+  }
+
+  // readAll
+  // readMany
+  async update(data: UpdateUserRequestDTO): Promise<User> {
     const userExit = await this.userRepository.findById(data.id)
-    if (userExit == null) {
+    if (!userExit) {
       throw new Error('user not exit')
     }
 
     if (data.email) {
       const emailAlreadyExit = await this.userRepository.findByEmail(data.email)
-      if (emailAlreadyExit != null) {
+      if (emailAlreadyExit) {
         throw new Error('user email is already in use')
       }
     }
-    
+
     const updateUserData = new User({
       id: userExit.id,
       name: data.name ?? userExit.name,
       email: data.email ?? userExit.email,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     })
     const updateUser = await this.userRepository.update(updateUserData)
     return updateUser
   }
 
-  async delete ({ id }: FindUserByIdRequestDTO): Promise<void> {
+  async delete({ id }: FindUserByIdRequestDTO): Promise<void> {
     const userAlreadyExit = await this.userRepository.findById(id)
     if (userAlreadyExit === undefined) {
       throw new Error('user not exist')

@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+import 'dotenv/config'
 import { app } from './domain/app'
 // var debug = require('debug')('example-api-mongoose:server');
 import http from 'http'
@@ -12,7 +12,7 @@ import http from 'http'
  * Get port from environment and store in Express.
  */
 
-const port: string = process.env.PORT ?? '3000'
+const port: string = process.env.DOMAIN_PORT ?? '3000'
 
 app.set('port', port)
 
