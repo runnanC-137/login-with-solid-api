@@ -63,15 +63,13 @@ export class PrismaUserRepository implements IUserRepository {
   /*  public async updateEmail (user: User): Promise<User> {
 
   } */
-  public async updatePassword(user: User): Promise<User> {
-    const updatedUserPrisma = await this.user.update({
+  public async updatePassword(user: User): Promise<void> {
+    await this.user.update({
       where: { id: user.id },
       data: {
         password: user.password,
       },
     })
-    const updatedUser = new User(updatedUserPrisma)
-    return updatedUser
   }
 
   public async delete(id: string): Promise<void> {

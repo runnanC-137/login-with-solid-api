@@ -1,6 +1,6 @@
 import { IValidationProvider } from '../../../service/providers/IValidationProvider'
 import { type Response, type Request } from 'express'
-import { UserUseCase } from '../../../service/use-case/user-user-case/user-use-case'
+import { UserUseCase } from '../../../service/use-case/user-use-case/user-use-case'
 
 export class UserController {
   constructor(
@@ -85,6 +85,35 @@ export class UserController {
         })
       ).data
       return response.status(200).json(user)
+    } catch (error: any) {
+      return response.status(400).json({
+        error: {
+          message: error.message ?? 'Unexpected error',
+          code: '000004',
+          error,
+        },
+      })
+    }
+  }
+
+  async updatePassword(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.params
+    const { password, newPassword } = request.body
+    try {
+      this.validationProvider.validDataForUpdatePasswordUser({
+        newPassword,
+      })
+
+      await this.userUseCase.updatePassword({
+        password,
+        newPassword,
+        id,
+      })
+
+      return response.status(200).json('user password changed with success')
     } catch (error: any) {
       return response.status(400).json({
         error: {

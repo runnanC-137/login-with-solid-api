@@ -4,6 +4,7 @@ import { type IUserRepository } from '../../repositories/IUserRepository'
 import { type CreateUserRequestDTO } from '../../dtos/create-user-dto'
 import { UpdateUserRequestDTO } from '../../dtos/update-user-dto'
 import { FindUserByIdRequestDTO } from '../../dtos/read-user-byId-dto'
+import { UpdateUserPasswordRequestDTO } from '../../dtos/update-user-password-dto'
 
 export class UserUseCase {
   constructor(
@@ -58,6 +59,34 @@ export class UserUseCase {
     })
     const updateUser = await this.userRepository.update(updateUserData)
     return updateUser
+  }
+
+  async updatePassword(data: UpdateUserPasswordRequestDTO): Promise<void> {
+    const userExit = await this.userRepository.findById(data.id)
+
+    if (!userExit) {
+      throw new Error('user not exit')
+    }
+
+    const isPasswordTruth = this.hashProvider.verifyPassword(
+      data.password,
+      userExit.password,
+    )
+
+    if (!isPasswordTruth) {
+      throw new Error('password incorrectly')
+    }
+
+    const hashPassword = this.hashProvider.hashPassword(data.newPassword)
+
+    const updateUserData = new User({
+      id: userExit.id,
+      name: userExit.name,
+      email: userExit.email,
+      password: hashPassword,
+    })
+
+    await this.userRepository.updatePassword(updateUserData)
   }
 
   async delete({ id }: FindUserByIdRequestDTO): Promise<void> {

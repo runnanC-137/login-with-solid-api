@@ -41,7 +41,7 @@ export class User {
   }
 
   get password() {
-    return this.props.email
+    return this.props.password ?? this.password
   }
 
   set password(password: string) {

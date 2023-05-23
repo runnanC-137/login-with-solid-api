@@ -3,4 +3,3 @@ export interface CreateUserRequestDTO {
   password: string
   email: string
 }
-  
