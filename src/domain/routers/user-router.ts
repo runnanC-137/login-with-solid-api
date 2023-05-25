@@ -4,10 +4,6 @@ import { authController } from '../middlewares/auth-middleware'
 
 const router = Router()
 
-router.post('/', (request: Request, response: Response) => {
-  userController.create(request, response)
-})
-
 router.use((request: Request, response: Response, next: NextFunction) => {
   authController.verify(request, response, next)
 })
