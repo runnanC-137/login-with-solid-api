@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import type IHashProvider from '../IHashProvider'
+import type IHashProvider from '../ihash-provider'
 
-class BcryptJsProvider implements IHashProvider {
+export class BcryptJsProvider implements IHashProvider {
   hashPassword(password: string): string {
     const saltRounds = 10
     const salt = bcrypt.genSaltSync(saltRounds)
@@ -14,5 +14,3 @@ class BcryptJsProvider implements IHashProvider {
     return isCorrectly
   }
 }
-
-export default BcryptJsProvider

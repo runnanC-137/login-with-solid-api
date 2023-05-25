@@ -3,8 +3,8 @@ import { authController } from '../controllers/auth-controller'
 
 const router = Router()
 
-router.post('/register', (request: Request, response: Response) => {
-  authController.register(request, response)
+router.post('/login', (request: Request, response: Response) => {
+  authController.login(request, response)
 })
 
 export { router }

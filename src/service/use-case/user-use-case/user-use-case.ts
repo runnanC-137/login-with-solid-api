@@ -1,5 +1,5 @@
 import { User } from '../../entities/User'
-import type IHashProvider from '../../providers/IHashProvider'
+import type IHashProvider from '../../providers/ihash-provider'
 import { type IUserRepository } from '../../repositories/IUserRepository'
 import { type CreateUserRequestDTO } from '../../dtos/create-user-dto'
 import { UpdateUserRequestDTO } from '../../dtos/update-user-dto'

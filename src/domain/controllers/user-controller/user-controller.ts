@@ -1,4 +1,4 @@
-import { IValidationProvider } from '../../../service/providers/IValidationProvider'
+import { IValidationProvider } from '../../../service/providers/ivalidation-provider'
 import { type Response, type Request } from 'express'
 import { UserUseCase } from '../../../service/use-case/user-use-case/user-use-case'
 

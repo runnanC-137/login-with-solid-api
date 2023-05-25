@@ -1,6 +1,6 @@
-require('dotenv/config')
+import 'dotenv/config'
 
-module.exports = {
+export const auth = {
   secret: process.env.TOKEN_SECRET ?? 'nsCPYmBVRM',
   refreshTokenSecret: process.env.TOKEN_REFRESH ?? 'TPhiqNVdao',
   expiresIn: process.env.TOKEN_EXPIREIN ?? 25200,

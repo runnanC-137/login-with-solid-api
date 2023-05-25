@@ -1,5 +1,6 @@
-import { Router, type Request, type Response } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 import { userController } from '../controllers/user-controller'
+import { authController } from '../middlewares/auth-middleware'
 
 const router = Router()
 
@@ -7,9 +8,10 @@ router.post('/', (request: Request, response: Response) => {
   userController.create(request, response)
 })
 
-/* router.post('/query', (request: Request, response: Response) => {
-  void findUsersByFieldController.handle(request, response)
-}) */
+router.use((request: Request, response: Response, next: NextFunction) => {
+  authController.verify(request, response, next)
+})
+
 router.get('/:id', (request: Request, response: Response) => {
   userController.read(request, response)
 })

@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi'
 import { CreateUserRequestDTO } from '../../dtos/create-user-dto'
 import { UpdateUserRequestDTO } from '../../dtos/update-user-dto'
-import { IValidationProvider } from '../IValidationProvider'
+import { IValidationProvider } from '../ivalidation-provider'
 
 export class HapiJoiValidationProvider implements IValidationProvider {
   public validDataForCreateUser(data: CreateUserRequestDTO): void {
