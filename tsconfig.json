@@ -109,7 +109,8 @@
       "@/*": [
         "./src/service/*",
         "./src/domain/*",
-        "./src/infra/*"
+        "./src/infra/*",
+        "./src/config/*"
     ],
     }
   }

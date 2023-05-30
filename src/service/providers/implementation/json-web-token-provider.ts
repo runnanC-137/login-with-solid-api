@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken'
-import { auth } from '../../../config/auth'
+import { auth } from '@/token-envs'
 import { ITokenProvider, IVerifyTokenResponseDTO } from '../itoken-provider'
 
 const { secret, expiresIn } = auth
+
 type JwtPayload = {
   id: string
 }
+
 export class JsonWebTokenProvider implements ITokenProvider {
   createToken(payload: object): string {
     const token = jwt.sign(payload, secret, { expiresIn })

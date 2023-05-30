@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import type IHashProvider from '../ihash-provider'
+import { IHashProvider } from '../ihash-provider'
 
 export class BcryptJsProvider implements IHashProvider {
   hashPassword(password: string): string {

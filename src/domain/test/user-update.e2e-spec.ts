@@ -3,7 +3,7 @@ import request from 'supertest'
 import { hashProvider } from '../../service/providers/implementation'
 import { userRepository } from '../../service/repositories/implementations'
 import { app } from '../app'
-import { User } from '../../service/entities/User'
+import { User } from '../../service/entities/user-entitie'
 
 describe('Testando a rota de login', () => {
   it('Deve retornar um usuario com nome e email atualizados', async () => {

@@ -2,7 +2,7 @@
 import request from 'supertest'
 import { app } from '../app'
 import { userRepository } from '../../service/repositories/implementations'
-import { User } from '../../service/entities/User'
+import { User } from '../../service/entities/user-entitie'
 
 describe('[e2e] testando a procura de um usuário por meio da request', async () => {
   test('Procurando um usuário', async () => {

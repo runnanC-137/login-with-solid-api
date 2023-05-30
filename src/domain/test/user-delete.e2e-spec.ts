@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '../app'
 import { userRepository } from '../../service/repositories/implementations'
 import { hashProvider } from '../../service/providers/implementation'
-import { User } from '../../service/entities/User'
+import { User } from '../../service/entities/user-entitie'
 
 describe('[e2e] testando a destruição de um usuário por meio da request', async () => {
   test('[e2e] deletando um usuário', async () => {

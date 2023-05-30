@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { app } from './domain/app'
+import { app } from '@/app'
 import http from 'http'
 
 const port = process.env.DOMAIN_PORT ?? '3000'
