@@ -1,18 +1,13 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router, Request, Response } from 'express'
 import { userController } from '../controllers/user-controller'
-import { authController } from '../middlewares/auth-middleware'
 
 const router = Router()
 
-router.use((request: Request, response: Response, next: NextFunction) => {
-  authController.verify(request, response, next)
+router.get('/all', (request: Request, response: Response) => {
+  userController.readAll(request, response)
 })
-
 router.get('/:id', (request: Request, response: Response) => {
   userController.read(request, response)
-})
-router.get('/', (request: Request, response: Response) => {
-  userController.readAll(request, response)
 })
 
 router.put('/password/:id', (request: Request, response: Response) => {

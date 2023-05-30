@@ -2,7 +2,7 @@ import { type JwtPayload } from 'jsonwebtoken'
 
 export interface IVerifyTokenResponseDTO {
   isValid: boolean
-  payload?: JwtPayload | string
+  payload?: JwtPayload
 }
 
 export interface ITokenProvider {

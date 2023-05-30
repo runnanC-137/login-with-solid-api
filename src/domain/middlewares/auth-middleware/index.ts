@@ -1,4 +1,4 @@
-import { authUseCase } from '../../../service/use-case/auth-use-case'
-import { AuthController } from './auth-middleware'
+import { authUseCase } from '@/use-cases/auth-use-case'
+import { AuthMiddleware } from './auth-middleware'
 
-export const authController = new AuthController(authUseCase)
+export const authMiddleware = new AuthMiddleware(authUseCase)

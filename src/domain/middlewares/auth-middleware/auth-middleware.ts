@@ -1,8 +1,8 @@
 import { type Response, type Request, type NextFunction } from 'express'
-import { AuthUseCase } from '../../../service/use-case/auth-use-case/auth-use-case'
+import { AuthUseCase } from '@/use-cases/auth-use-case/auth-use-case'
 
-export class AuthController {
-  constructor(private readonly authUseCase: AuthUseCase) {}
+export class AuthMiddleware {
+  constructor(private authUseCase: AuthUseCase) {}
 
   async verify(
     request: Request,
@@ -12,8 +12,12 @@ export class AuthController {
     const headerToken: string | undefined = request.header('authorization')
     // console.log(headerToken, 'headerToken')
     try {
-      const token = this.catchToken(headerToken)
-      await this.authUseCase.verify({ token })
+      if (headerToken === undefined) {
+        throw new Error('token is not defined')
+      }
+      const [, token] = headerToken.split(' ')
+      const { password, ...user } = await this.authUseCase.verify({ token })
+      request.user = user
       next()
     } catch (error: any) {
       console.log(error)

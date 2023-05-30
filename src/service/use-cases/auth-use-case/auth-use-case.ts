@@ -1,8 +1,9 @@
-import { IAuthenticationRequestDTO } from '../../dtos/authentication-request-dto'
-import { RegisterUserRequestDTO } from '../../dtos/register-user-request-dto'
-import IHashProvider from '../../providers/ihash-provider'
-import { ITokenProvider } from '../../providers/itoken-provider'
-import { IUserRepository } from '../../repositories/IUserRepository'
+import { IAuthenticationRequestDTO } from '@/dtos/authentication-request-dto'
+import { RegisterUserRequestDTO } from '@/dtos/register-user-request-dto'
+import { IHashProvider } from '@/providers/ihash-provider'
+import { ITokenProvider } from '@/providers/itoken-provider'
+import { IUserRepository } from '@/repositories/IUserRepository'
+import { User } from '@/entities/User'
 
 export class AuthUseCase {
   constructor(
@@ -28,10 +29,18 @@ export class AuthUseCase {
     return token
   }
 
-  async verify({ token }: IAuthenticationRequestDTO): Promise<void> {
-    const { isValid } = this.tokenProvider.verifyToken(token)
+  async verify({ token }: IAuthenticationRequestDTO): Promise<User> {
+    const { isValid, payload } = this.tokenProvider.verifyToken(token)
     if (!isValid) {
       throw new Error('token is not valid')
     }
+    if (!payload) {
+      throw new Error('token is not valid')
+    }
+    const user = await this.userRepository.findById(payload.id)
+    if (!user) {
+      throw new Error('token is not valid')
+    }
+    return user
   }
 }
