@@ -34,7 +34,7 @@ export class UserController {
   }
 
   async readMe(request: Request, response: Response): Promise<Response> {
-    const { id } = request.user.id
+    const { id } = request.user
     try {
       const { password, ...user } = await this.userUseCase.read({ id })
       return response.status(200).json(user)
@@ -86,7 +86,7 @@ export class UserController {
   }
 
   async updateMe(request: Request, response: Response): Promise<Response> {
-    const { id } = request.user.id
+    const { id } = request.user
     const { email, name } = request.body
     try {
       this.validationProvider.validDataForUpdateUser({
@@ -135,6 +135,35 @@ export class UserController {
     }
   }
 
+  async updateMyPassword(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.user
+    const { password, newPassword } = request.body
+    try {
+      this.validationProvider.validDataForUpdatePasswordUser({
+        newPassword,
+      })
+
+      await this.userUseCase.updatePassword({
+        password,
+        newPassword,
+        id,
+      })
+
+      return response.status(200).json('user password changed with success')
+    } catch (error: any) {
+      return response.status(400).json({
+        error: {
+          message: error.message ?? 'Unexpected error',
+          code: '000004',
+          error,
+        },
+      })
+    }
+  }
+
   async updatePassword(
     request: Request,
     response: Response,
@@ -165,7 +194,7 @@ export class UserController {
   }
 
   async deleteMe(request: Request, response: Response): Promise<Response> {
-    const { id } = request.user.id
+    const { id } = request.user
     try {
       await this.userUseCase.delete({ id })
       return response.json({ message: 'user deleted' })
