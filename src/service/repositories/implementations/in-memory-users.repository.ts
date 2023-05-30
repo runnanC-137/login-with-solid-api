@@ -1,5 +1,5 @@
 import { IUserRepository } from '../iuser.repository'
-import { type User } from '@/entities/user.entitie'
+import { type User } from '@/entities/user.entity'
 
 export class InMemoryUsersRepository implements IUserRepository {
   user: any

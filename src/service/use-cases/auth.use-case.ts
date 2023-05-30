@@ -3,7 +3,7 @@ import { RegisterUserRequestDTO } from '@/dtos/register-user-request.dto'
 import { IHashProvider } from '@/providers/ihash.provider'
 import { ITokenProvider } from '@/providers/itoken.provider'
 import { IUserRepository } from '@/repositories/iuser.repository'
-import { User } from '@/entities/user.entitie'
+import { User } from '@/entities/user.entity'
 
 export class AuthUseCase {
   constructor(

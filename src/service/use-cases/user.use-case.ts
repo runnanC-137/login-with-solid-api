@@ -1,4 +1,4 @@
-import { User } from '@/entities/user.entitie'
+import { User } from '@/entities/user.entity'
 import { IHashProvider } from '@/providers/ihash.provider'
 import { IUserRepository } from '@/repositories/iuser.repository'
 import { CreateUserRequestDTO } from '@/dtos/create-user.dto'

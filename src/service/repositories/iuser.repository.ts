@@ -1,4 +1,4 @@
-import { type User } from '@/entities/user.entitie'
+import { type User } from '@/entities/user.entity'
 
 export interface IUserRepository {
   user: any
