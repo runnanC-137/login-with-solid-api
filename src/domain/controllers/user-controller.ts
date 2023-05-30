@@ -1,6 +1,6 @@
-import { IValidationProvider } from '@/providers/ivalidation-provider'
+import { IValidationProvider } from '@/providers/ivalidation.provider'
 import { type Response, type Request } from 'express'
-import { UserUseCase } from '@/use-cases/user-use-case/user-use-case'
+import { UserUseCase } from '@/use-cases/user.use-case'
 
 export class UserController {
   constructor(

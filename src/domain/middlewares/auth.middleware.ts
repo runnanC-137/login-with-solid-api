@@ -1,5 +1,5 @@
 import { type Response, type Request, type NextFunction } from 'express'
-import { AuthUseCase } from '@/use-cases/auth-use-case/auth-use-case'
+import { AuthUseCase } from '@/use-cases/auth.use-case'
 
 export class AuthMiddleware {
   constructor(private authUseCase: AuthUseCase) {}

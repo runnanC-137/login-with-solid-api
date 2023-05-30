@@ -1,9 +1,9 @@
-import { IAuthenticationRequestDTO } from '@/dtos/authentication-request-dto'
-import { RegisterUserRequestDTO } from '@/dtos/register-user-request-dto'
-import { IHashProvider } from '@/providers/ihash-provider'
-import { ITokenProvider } from '@/providers/itoken-provider'
-import { IUserRepository } from '@/repositories/IUserRepository'
-import { User } from '@/entities/user-entitie'
+import { IAuthenticationRequestDTO } from '@/dtos/authentication-request.dto'
+import { RegisterUserRequestDTO } from '@/dtos/register-user-request.dto'
+import { IHashProvider } from '@/providers/ihash.provider'
+import { ITokenProvider } from '@/providers/itoken.provider'
+import { IUserRepository } from '@/repositories/iuser.repository'
+import { User } from '@/entities/user.entitie'
 
 export class AuthUseCase {
   constructor(

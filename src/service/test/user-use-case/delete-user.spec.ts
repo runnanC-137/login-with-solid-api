@@ -2,8 +2,8 @@
 import { createUserUseCase } from '../create-user'
 import { deleteUserUseCase } from '../delete-user'
 import { findUserUseCase } from '../find-user/find-user-byId'
-import { type ICreateUserRequestDTO } from '../create-user/icreate-user-DTO'
-import { User } from '../../entities/user-entitie'
+import { type ICreateUserRequestDTO } from '../create-user/icreate-user.dto'
+import { User } from '../../entities/user.entitie'
 
 const matueData: ICreateUserRequestDTO = {
   name: 'matue',

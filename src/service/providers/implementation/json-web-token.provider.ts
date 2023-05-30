@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { auth } from '@/token-envs'
-import { ITokenProvider, IVerifyTokenResponseDTO } from '../itoken-provider'
+import { ITokenProvider, IVerifyTokenResponseDTO } from '../itoken.provider'
 
 const { secret, expiresIn } = auth
 

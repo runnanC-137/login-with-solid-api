@@ -1,7 +1,7 @@
 
 import { updateUserUseCase } from '../update-user'
 import { userRepository } from '../../repositories/implementations'
-import { User } from '../../entities/user-entitie'
+import { User } from '../../entities/user.entitie'
 
 describe('testando a atualização de usuário', async () => {
   test('atualizando um usuário', async () => {

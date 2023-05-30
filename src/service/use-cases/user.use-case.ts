@@ -1,10 +1,10 @@
-import { User } from '@/entities/user-entitie'
-import { IHashProvider } from '@/providers/ihash-provider'
-import { IUserRepository } from '@/repositories/IUserRepository'
-import { CreateUserRequestDTO } from '@/dtos/create-user-dto'
-import { UpdateUserRequestDTO } from '@/dtos/update-user-dto'
-import { FindUserByIdRequestDTO } from '@/dtos/read-user-byId-dto'
-import { UpdateUserPasswordRequestDTO } from '@/dtos/update-user-password-dto'
+import { User } from '@/entities/user.entitie'
+import { IHashProvider } from '@/providers/ihash.provider'
+import { IUserRepository } from '@/repositories/iuser.repository'
+import { CreateUserRequestDTO } from '@/dtos/create-user.dto'
+import { UpdateUserRequestDTO } from '@/dtos/update-user.dto'
+import { FindUserByIdRequestDTO } from '@/dtos/read-user.dto'
+import { UpdateUserPasswordRequestDTO } from '@/dtos/update-user-password.dto'
 
 export class UserUseCase {
   constructor(
