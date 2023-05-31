@@ -1,20 +1,19 @@
-
 import request from 'supertest'
 import { app } from '../../../app'
-import { userRepository } from '../../../../service/repositories/implementations'
-import { User } from '../../../../service/entities/User'
+import { userRepository } from '../../../../@/repositories/implementations'
+import { User } from '../../../../@/entities/User'
 
 describe('[e2e] testando a procura de usuários por meio da request', async () => {
   test('Procurando os usuário com nome Marcelo', async () => {
     const userData = new User({
       name: 'Marcelo',
       email: 'runnan@hotgas.com',
-      password: '818283732'
+      password: '818283732',
     })
     const userData2 = new User({
       name: 'Ruan',
       email: 'runnan@hotgas.com',
-      password: '818283732'
+      password: '818283732',
     })
     await userRepository.create(userData)
     await userRepository.create(userData)
