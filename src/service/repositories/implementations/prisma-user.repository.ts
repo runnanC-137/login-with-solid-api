@@ -1,6 +1,6 @@
-import { IUserRepository } from '../IUserRepository'
-import { User } from '../../entities/User'
-import { prisma } from '../../../infra/prisma'
+import { IUserRepository } from '../iuser.repository'
+import { User } from '@/entities/user.entity'
+import { prisma } from '@/prisma'
 
 export class PrismaUserRepository implements IUserRepository {
   public user = prisma.user /*  model.User */

@@ -1,8 +1,5 @@
-import {
-  type IUserRepository,
-  type IUserDataQueryProps,
-} from '../IUserRepository'
-import { type User } from '../../entities/User'
+import { IUserRepository } from '../iuser.repository'
+import { type User } from '@/entities/user.entity'
 
 export class InMemoryUsersRepository implements IUserRepository {
   user: any
@@ -20,11 +17,6 @@ export class InMemoryUsersRepository implements IUserRepository {
 
   public async findAll(): Promise<User[]> {
     return this.users
-  }
-
-  public async findMany({ name }: IUserDataQueryProps): Promise<User[]> {
-    const ManyUsers = this.users.filter((user) => user.name === name)
-    return ManyUsers
   }
 
   public async findOne(dataQuery: {

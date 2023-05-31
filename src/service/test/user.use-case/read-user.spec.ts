@@ -1,9 +1,8 @@
 
 import { createUserUseCase } from '../create-user'
-import { deleteUserUseCase } from '../delete-user'
+import { type ICreateUserRequestDTO } from '../create-user/icreate-user.dto'
 import { findUserUseCase } from '../find-user/find-user-byId'
-import { type ICreateUserRequestDTO } from '../create-user/icreate-user-DTO'
-import { User } from '../../entities/User'
+import { User } from '../../entities/user.entity'
 
 const matueData: ICreateUserRequestDTO = {
   name: 'matue',
@@ -11,7 +10,7 @@ const matueData: ICreateUserRequestDTO = {
   password: '1234567'
 }
 
-describe('testando a destruição de um usuário', async () => {
+describe('testado a procura de um usuário(s)', async () => {
   const matue = await createUserUseCase.execute(matueData)
   const matueId = matue.id
 
@@ -22,19 +21,18 @@ describe('testando a destruição de um usuário', async () => {
     expect(matue.email).toBe(matueData.email)
   })
 
-  test('excluindo o usuário matue', async () => {
-    await deleteUserUseCase.execute({ id: matueId })
-    try {
-      const matueUser = await findUserUseCase.execute({ id: matueId })
-      expect(matueUser).toBeTypeOf('undefined')
-    } catch (error: any) {
-      expect(error.message).toBe('user not exist')
-    }
+  test('procurando o usuário matue', async () => {
+    const matue = await findUserUseCase.execute({
+      id: matueId
+    })
+    expect(matue.id).toBe(matueId)
+    expect(matue).toBeInstanceOf(User)
+    expect(matue.name).toBe(matueData.name)
   })
 
   test('excluindo um usuário inexistente', async () => {
     try {
-      await deleteUserUseCase.execute({ id: 'matueData.id' })
+      await findUserUseCase.execute({ id: 'matueData.id' })
     } catch (error: any) {
       expect(error.message).toBe('user not exist')
     }

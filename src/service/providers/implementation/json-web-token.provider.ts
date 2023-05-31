@@ -1,8 +1,15 @@
 import jwt from 'jsonwebtoken'
-import { auth } from '../../../config/auth'
-import { ITokenProvider, IVerifyTokenResponseDTO } from '../itoken-provider'
+import { auth } from '@/token.config'
+import {
+  ITokenProvider,
+  IVerifyTokenResponseDTO,
+} from '@/providers/itoken.provider'
 
 const { secret, expiresIn } = auth
+
+type JwtPayload = {
+  id: string
+}
 
 export class JsonWebTokenProvider implements ITokenProvider {
   createToken(payload: object): string {
@@ -12,16 +19,14 @@ export class JsonWebTokenProvider implements ITokenProvider {
 
   verifyToken(token: string): IVerifyTokenResponseDTO {
     try {
-      const decoded = jwt.verify(token, secret)
+      const payload = jwt.verify(token, secret) as JwtPayload
       return {
         isValid: true,
-        payload: decoded,
+        payload,
       }
     } catch (error: any) {
-      return {
-        isValid: false,
-        payload: { error },
-      }
+      console.log(error)
+      throw new Error('Token is not valid')
     }
   }
 }

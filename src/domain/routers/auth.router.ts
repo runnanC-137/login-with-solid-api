@@ -1,6 +1,5 @@
 import { Router, type Request, type Response } from 'express'
-import { authController } from '../controllers/auth-controller'
-import { userController } from '../controllers/user-controller'
+import { authController, userController } from '@/controllers/'
 
 const router = Router()
 
